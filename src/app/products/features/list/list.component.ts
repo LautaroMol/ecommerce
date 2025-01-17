@@ -1,17 +1,21 @@
 import { Component,inject } from '@angular/core';
-import { ProductsService } from '../../data-access/products.service';
+import { ProductStateServiceService } from '../../data-access/product-state-service.service';
+import { CommonModule } from '@angular/common';
+import { ProductCardComponent } from '../../ui/product-card/product-card.component';
 
 @Component({
   selector: 'app-list',
-  imports: [],
+  imports: [CommonModule,ProductCardComponent],
   templateUrl: './list.component.html',
   styles: ``,
-  providers: [ProductsService]
+  providers: [ProductStateServiceService]
 })
 export default class ListComponent {
 
+  productsState = inject(ProductStateServiceService);
 
-  constructor() {
-
+  changePage(){
+    const page = this.productsState.state.page() +1;
+    this.productsState.changePages$.next(page);
   }
 }
