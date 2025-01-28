@@ -8,3 +8,8 @@ export interface Product {
   category: string;
   rating: {rate: number; count: number};
 }
+
+export interface ProductItemCart {
+  product: Product;
+  quantity: number;
+}
