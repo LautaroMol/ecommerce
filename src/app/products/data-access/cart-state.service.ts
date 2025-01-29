@@ -33,6 +33,7 @@ export class CartStateService {
       add: (state, action$: Observable<ProductItemCart>) =>
         action$.pipe(
           map((product) => this.add(state, product))),
+          remove: (state, action$: Observable<number>) => action$.pipe(map((id) => this.remove(state, id))),
     },
     effects: (state) => ({
       load: () => {
@@ -59,6 +60,9 @@ export class CartStateService {
     };
 
   }
+  private remove(state: Signal<State>, id: number) {
+    return {
+      products: state().products.filter((product) => product.product.id !== id),
+    };
+  }
 }
-
-//31.34

@@ -5,6 +5,8 @@ export const routes: Routes = [
   path: '',
     redirectTo: 'products',
     pathMatch: 'full'
+  },{
+    path: 'cart', loadChildren: () => import('./cart/cart.routes'),
   },
   {
     path: '',
