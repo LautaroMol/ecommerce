@@ -1,30 +1,26 @@
-<p class="text-white">Lista de productos</p>
 <div class="mx-auto max-w-screen-xl">
-
-@switch (productsState.state.status() ) {
-  @case ('loading') {
-    <p class="text-white">Loading...</p>
-  }
-  @case ('error') {
-    <p class="text-white">Error al cargar los productos</p>
-  }
-  @default {
-    <div class="flex justify-end my-6">
-      <button type="button" (click)="changePage()"
-      class="text-white bg-blue-700 hover:bg-blue-800
-      focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5
-      py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
-      dark:focus:ring-blue-800">
-        Cambiar pagina</button>
-    </div>
-    <div class="grid grid-cols-[repeat(4,300px)] gap-4">
-      @for(product of productsState.state().products; track product) {
-        <app-product-card class="block" [product]="product" (addToCart)="addToCart($event)"/>
-          }
+  <h2 class="text-white text-4xl font-bold">Products List</h2>
+  @switch (productsState.state.status() ) {
+    @case ('loading') {
+      <p class="text-white">Loading...</p>
+    }
+    @case ('error') {
+      <p class="text-white">Error al cargar los productos</p>
+    }
+    @default {
+      <div class="flex justify-end my-6">
+        <button type="button" (click)="changePage()"
+        class="text-white bg-blue-700 hover:bg-blue-800
+        focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5
+        py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none
+        dark:focus:ring-blue-800">
+          Load more products</button>
       </div>
+      <div class="grid grid-cols-[repeat(4,300px)] gap-4">
+        @for(product of productsState.state().products; track product) {
+          <app-product-card class="block" [product]="product" (addToCart)="addToCart($event)"/>
+        }
+      </div>
+    }
   }
-}
-
-//50:09
-
 </div>

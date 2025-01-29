@@ -1,5 +1,7 @@
 import { Component, effect, inject, input } from '@angular/core';
 import { ProductDetailStateService } from '../../data-access/product-detail-state.service';
+import { CartStateService } from '../../data-access/cart-state.service';
+import { Product } from '../../../interfaces/product';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,6 +14,7 @@ export default class ProductDetailComponent {
 
   productDetailState = inject(ProductDetailStateService).state;
   id = input.required<string>();
+  cartState = inject(CartStateService).state;
 
   constructor(){
     effect(()=>{
@@ -20,4 +23,7 @@ export default class ProductDetailComponent {
     })
   }
 
+  addToCart(product: Product): void {
+    this.cartState.add({product: this.productDetailState.product(), quantity: 1});
+  }
 }
